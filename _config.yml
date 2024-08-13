@@ -1,4 +1,5 @@
 title: My Blog
 description: A blog about data science and more
+theme: jekyll-theme-minimal
 baseurl: ""
-url: "https://TamokiLoi.github.io/repository"
+url: "https://TamokiLoi.github.io/TamokiLoi.github.io"
