@@ -3,98 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Science Blog Post</title>
+    <title>Analyzing Stack Overflow Developer Survey 2023 Data</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            background: #f4f4f4;
         }
         .container {
             width: 80%;
             margin: auto;
             overflow: hidden;
         }
-        h1, h2, h3 {
-            color: #333;
-        }
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
+        header {
             background: #333;
             color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #ddd 3px solid;
+            margin-bottom: 20px;
         }
-        .content {
-            background: #fff;
+        header h1 {
+            text-align: center;
+            margin: 0;
+        }
+        main {
             padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #333;
+        }
+        code {
+            background: #e1e1e1;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 1.1em;
+        }
+        pre {
+            background: #e1e1e1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Data Science Blog Post</h1>
+            <h1>Analyzing Stack Overflow Developer Survey 2023 Data</h1>
         </div>
     </header>
+    
+    <main class="container">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#project-overview">Project Overview</a></li>
+            <li><a href="#data-preparation">Data Preparation</a></li>
+            <li><a href="#analysis">Analysis</a>
+                <ul>
+                    <li><a href="#1-salary-distribution-by-job-role">1. Salary Distribution by Job Role</a></li>
+                    <li><a href="#2-relationship-between-experience-and-salary">2. Relationship Between Experience and Salary</a></li>
+                    <li><a href="#3-factors-influencing-ai-tool-adoption">3. Factors Influencing AI Tool Adoption</a></li>
+                </ul>
+            </li>
+            <li><a href="#conclusion">Conclusion</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
 
-    <div class="container">
-        <div class="content">
-            <h2>Project Overview</h2>
-            <p>This blog post covers the analysis and findings from the Udacity Data Scientist Nanodegree Project, where we explore data from the Stack Overflow 2023 Developer Survey. The goal of this analysis is to gain insights into various aspects of the software development industry, including programming languages, job roles, and salary trends.</p>
-            
-            <h2>Installation</h2>
-            <p>To run the code for this project, you need Python version 3.* and some libraries. To install these libraries, execute:</p>
-            <pre><code>pip install -r requirements.txt</code></pre>
-            
-            <h2>Project Motivation</h2>
-            <p>The motivation behind this project is to analyze the Stack Overflow 2023 Developer Survey data to answer key questions such as:</p>
-            <ul>
-                <li>What are the most used programming languages?</li>
-                <li>How do programming languages used at work relate to those people want to learn?</li>
-                <li>What are the salary trends across different job roles?</li>
-            </ul>
-            
-            <h2>File Description</h2>
-            <ul>
-                <li><strong>exploratory_analysis.ipynb:</strong> Notebook containing the data analysis and visualizations.</li>
-                <li><strong>data/survey_results_public.csv:</strong> Stack Overflow's 2023 Annual Developer Survey data.</li>
-                <li><strong>requirements.txt:</strong> List of Python libraries required for the project.</li>
-            </ul>
-            
-            <h2>Results</h2>
-            <p>The analysis provided insights into the following:</p>
-            <ul>
-                <li>Trends in programming language usage and interest.</li>
-                <li>Salary distribution across different job roles.</li>
-                <li>Correlation between experience and salary.</li>
-            </ul>
-            <p>The full results and detailed analysis can be found in the Jupyter Notebook file.</p>
-            
-            <h2>Licensing, Authors, and Acknowledgements</h2>
-            <p>Credit goes to Stack Overflow for providing the data used in this project. The data can be found on Stack Overflow’s survey page. All code and analyses are the work of the author, with references to external resources and communities such as Stack Overflow and Kaggle where appropriate.</p>
-        </div>
-    </div>
+        <h2 id="project-overview">Project Overview</h2>
+        <p>
+            The Stack Overflow Developer Survey 2023 provides valuable insights into the software development industry. For this project, I focused on understanding:
+        </p>
+        <ul>
+            <li>The distribution of salaries among different job roles.</li>
+            <li>How experience level relates to salary.</li>
+            <li>Factors influencing the adoption of AI tools.</li>
+        </ul>
+        <p>
+            The analysis was performed using Python, with libraries including Pandas, NumPy, Matplotlib, and Seaborn. Below is a detailed walkthrough of the analysis.
+        </p>
+
+        <h2 id="data-preparation">Data Preparation</h2>
+
+        <h3>Data Source</h3>
+        <p>
+            The dataset used for this analysis is the Stack Overflow Developer Survey 2023, which includes various fields related to developer profiles, job roles, salaries, and more.
+        </p>
+
+        <h3>Libraries Used</h3>
+        <ul>
+            <li><code>Pandas</code>: For data manipulation and analysis.</li>
+            <li><code>NumPy</code>: For numerical operations.</li>
+            <li><code>Matplotlib</code>: For creating static, animated, and interactive visualizations.</li>
+            <li><code>Seaborn</code>: For statistical data visualization.</li>
+        </ul>
+
+        <h3>Data Cleaning and Transformation</h3>
+        <p>
+            The data was cleaned by removing missing values and transforming categorical variables into a more analysis-friendly format. For example, job roles with multiple entries were split into individual roles to get accurate counts.
+        </p>
+
+        <h2 id="analysis">Analysis</h2>
+
+        <h3 id="1-salary-distribution-by-job-role">1. Salary Distribution by Job Role</h3>
+        <p>
+            To understand salary distribution among different job roles, I used a bar plot to visualize the average salaries for each role. The analysis revealed significant variations in salaries across different job roles.
+        </p>
+        <pre><code class="language-python">
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Calculate the mean salary for each job role
+mean_salaries = df_exploded.groupby('DevType')['ConvertedCompYearly'].mean().reset_index()
+
+# Sort the roles by mean salary for better visualization
+mean_salaries = mean_salaries.sort_values(by='ConvertedCompYearly', ascending=False)
+
+# Create a bar plot for mean salaries by job role
+plt.figure(figsize=(14, 8))
+sns.barplot(data=mean_salaries, x='DevType', y='ConvertedCompYearly', palette='viridis')
+plt.title('Average Salary by Job Role')
+plt.xlabel('Job Role')
+plt.ylabel('Average Annual Salary (USD)')
+plt.xticks(rotation=45, ha='right')
+plt.show()
+        </code></pre>
+
+        <a href="https://ibb.co/ZYvGF1c"><img src="https://i.ibb.co/yYKdZBg/Screenshot-2024-08-13-at-18-46-35.png" alt="Screenshot-2024-08-13-at-18-46-35" border="0" width="1000" /></a>
+
+        <h3 id="2-relationship-between-experience-and-salary">2. Relationship Between Experience and Salary</h3>
+        <p>
+            To explore how experience level (measured in years of coding) relates to salary, I used a line plot showing the average salary for different experience bins. This helps identify trends in salary growth with increasing experience.
+        </p>
+        <pre><code class="language-python">
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Bin the YearsCode into categories
+df_experience_salary['YearsCodeBin'] = pd.cut(df_experience_salary['YearsCode'], bins=range(0, df_experience_salary['YearsCode'].max() + 5, 5))
+
+# Calculate mean salary for each bin
+mean_salary_by_experience = df_experience_salary.groupby('YearsCodeBin')['ConvertedCompYearly'].mean().reset_index()
+
+# Create a line plot to show the trend
+plt.figure(figsize=(12, 8))
+sns.lineplot(data=mean_salary_by_experience, x='YearsCodeBin', y='ConvertedCompYearly', marker='o')
+plt.title('Average Salary by Coding Experience Level')
+plt.xlabel('Years of Coding Experience (Binned)')
+plt.ylabel('Average Annual Salary (USD)')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+        </code></pre>
+
+        <a href="https://ibb.co/dgMRpDr"><img src="https://i.ibb.co/gV9xWJ3/Screenshot-2024-08-13-at-18-51-15.png" alt="Screenshot-2024-08-13-at-18-51-15" border="0" width="1000" /></a>
+
+        <h3 id="3-factors-influencing-ai-tool-adoption">3. Factors Influencing AI Tool Adoption</h3>
+        <p>
+            Finally, I examined the factors influencing the adoption of AI tools by analyzing the survey responses related to AI tool usage and interest. A bar plot was used to visualize the frequency of interest in various AI tools.
+        </p>
+        <pre><code class="language-python">
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Filter relevant columns for AI tool interest
+df_ai_tools = df[['AIToolInterested in Using', 'AIToolCurrently Using']].dropna()
+
+# Create a bar plot for AI tool interest
+plt.figure(figsize=(12, 8))
+sns.countplot(data=df_ai_tools, y='AIToolInterested in Using', palette='viridis')
+plt.title('Interest in AI Tools')
+plt.xlabel('Number of Responses')
+plt.ylabel('AI Tool')
+plt.show()
+        </code></pre>
+
+        <a href="https://ibb.co/TkhJZHX"><img src="https://i.ibb.co/rmyqgZP/Screenshot-2024-08-13-at-18-51-23.png" alt="Screenshot-2024-08-13-at-18-51-23" border="0" width="1000" /></a>
+
+        <h2 id="conclusion">Conclusion</h2>
+        <p>
+            The analysis of the Stack Overflow Developer Survey 2023 provided valuable insights into salary distribution, the relationship between experience and salary, and factors influencing AI tool adoption. The findings highlight:
+        </p>
+        <ul>
+            <li>Significant salary differences among various job roles.</li>
+            <li>A clear trend of increasing salary with more years of coding experience.</li>
+            <li>Varied interest in AI tools among developers.</li>
+        </ul>
+        <p>
+            These insights can help guide career decisions and highlight areas for further research in the software development industry.
+        </p>
+
+        <h2 id="references">References</h2>
+        <ul>
+            <li><a href="https://stackoverflow.com/research/developer-survey-2023">Stack Overflow Developer Survey 2023</a></li>
+            <li><a href="https://pandas.pydata.org/pandas-docs/stable/">Pandas Documentation</a></li>
+            <li><a href="https://seaborn.pydata.org/">Seaborn Documentation</a></li>
+            <li><a href="https://matplotlib.org/stable/contents.html">Matplotlib Documentation</a></li>
+        </ul>
+    </main>
 
     <footer>
-        <p>&copy; 2024 Data Science Blog. All rights reserved.</p>
+        <p>&copy; 2024 Tamoki Loi</p>
     </footer>
 </body>
 </html>
