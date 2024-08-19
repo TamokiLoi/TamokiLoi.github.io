@@ -239,6 +239,45 @@
                 California.
             </p>
 
+            <h2 id="metrics">Metrics</h2>
+            <p>
+                For this project, we will use the Root Mean Squared Error (RMSE) to evaluate the performance of our
+                regression model. RMSE is a widely accepted metric for regression tasks, especially those involving
+                price prediction.
+            </p>
+            <p>
+                <strong>Justification for Using RMSE:</strong>
+                RMSE is an effective metric for several reasons:
+            </p>
+            <ul>
+                <li>
+                    <strong>Sensitivity to Large Errors:</strong> RMSE penalizes larger errors more than smaller ones
+                    due to its squaring function. This characteristic is particularly important in housing price
+                    prediction, where large deviations from actual prices can have significant implications.
+                </li>
+                <li>
+                    <strong>Interpretability:</strong> RMSE provides an error metric in the same unit as the target
+                    variable (housing prices), making it easier to interpret and understand the magnitude of the errors
+                    in terms of actual price values.
+                </li>
+                <li>
+                    <strong>Common Usage:</strong> RMSE is commonly used in real estate and economic forecasting, making
+                    it a well-established standard for evaluating the accuracy of housing price predictions.
+                </li>
+            </ul>
+            <p>
+                <strong>Relevance to the Problem Domain:</strong>
+                In the context of housing price prediction, minimizing prediction errors is crucial. Housing prices can
+                vary significantly, and large errors in predictions can impact decision-making and investment
+                strategies. RMSE helps in assessing how well our model generalizes to new data and ensures that our
+                predictions are as close to actual prices as possible.
+            </p>
+            <p>
+                Additionally, RMSE's ability to highlight large errors helps in refining the model further to address
+                areas where predictions are most inaccurate. This is especially important in real estate where accurate
+                pricing is key to effective decision-making.
+            </p>
+
             <h2 id="data-exploration">II. Data Exploration</h2>
             <p>
                 In this section, we explore the dataset to understand its features and characteristics. We report
