@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>How Coding Experience and Job Roles Influence Salaries: Findings from Stack Overflow 2023 Survey</title>
+        <title>Predicting Housing Prices: An Analysis of the California Housing Prices Dataset</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -63,10 +63,15 @@
     <body>
         <header>
             <div class="container">
-                <h1>How Coding Experience and Job Roles Influence Salaries: Findings from Stack Overflow 2023 Survey</h1>
+                <h1>Predicting Housing Prices: An Analysis of the California Housing Prices Dataset</h1>
             </div>
             <div style="text-align: center">
-                <img src="https://survey.stackoverflow.co/2023/up_/src/img/dev-survey-2023.png" alt="" width="1000" height="auto" />
+                <img
+                    src="https://storage.googleapis.com/kaggle-datasets-images/5227/7876/3d18388d350d2791f4121a232acce097/dataset-cover.jpg?t=2017-11-24-13-55-38"
+                    alt="Project Image"
+                    width="800"
+                    height="auto"
+                />
             </div>
         </header>
 
@@ -75,19 +80,20 @@
             <ul>
                 <li><a href="#project-overview">Overview</a></li>
                 <li>
-                    <a href="#analysis">Analysis</a>
+                    <a href="#data-exploration">Data Exploration</a>
                     <ul>
-                        <li><a href="#1-salary-distribution-by-job-role">1. Salary Distribution by Job Role</a></li>
-                        <li>
-                            <a href="#2-relationship-between-experience-and-salary"
-                                >2. Relationship Between Experience and Salary</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#3-factors-influencing-ai-tool-adoption"
-                                >3. Factors Influencing AI Tool Adoption</a
-                            >
-                        </li>
+                        <li><a href="#feature-summary">Feature Summary</a></li>
+                        <li><a href="#statistics">Statistics</a></li>
+                        <li><a href="#abnormalities">Abnormalities</a></li>
+                    </ul>
+                </li>
+                <li><a href="#data-visualization">Data Visualization</a></li>
+                <li>
+                    <a href="#methodology">Methodology</a>
+                    <ul>
+                        <li><a href="#data-preprocessing">Data Preprocessing</a></li>
+                        <li><a href="#implementation">Implementation</a></li>
+                        <li><a href="#model-refinement">Model Refinement</a></li>
                     </ul>
                 </li>
                 <li><a href="#conclusion">Conclusion</a></li>
@@ -96,89 +102,276 @@
 
             <h2 id="project-overview">Overview</h2>
             <p>
-                The Stack Overflow Developer Survey 2023 provides valuable insights into the software development
-                industry. For this project, I focused on understanding:
+                This project focuses on predicting housing prices using the California Housing Prices dataset. The goal
+                is to build and refine a Random Forest Regressor model to accurately predict housing prices based on
+                various features. The project involves data exploration, visualization, preprocessing, and model
+                refinement.
             </p>
-            <ul>
-                <li>The distribution of salaries among different job roles.</li>
-                <li>How experience level relates to salary.</li>
-                <li>Factors influencing the adoption of AI tools.</li>
-            </ul>
+
+            <h2 id="data-exploration">1. Data Exploration</h2>
             <p>
-                The analysis was performed using Python, with libraries including Pandas, NumPy, Matplotlib, and
-                Seaborn. Below is a detailed walkthrough of the analysis.
+                In this section, we explore the dataset to understand its features and characteristics. We report
+                relevant statistics and identify any abnormalities or features that need to be addressed.
             </p>
 
-            <h2 id="analysis">Analysis</h2>
-
-            <h3 id="1-salary-distribution-by-job-role">1. Salary Distribution by Job Role</h3>
+            <h3 id="feature-summary">Feature Summary</h3>
             <p>
-                To understand salary distribution among different job roles, I used a bar plot to visualize the average
-                salaries for each role. The analysis revealed significant variations in salaries across different job
-                roles.
+                The dataset includes several key features that are crucial for predicting housing prices. Here is a
+                summary of these features and their importance:
             </p>
 
-            <a href="https://ibb.co/ZYvGF1c"
-                ><img
-                    src="https://i.ibb.co/yYKdZBg/Screenshot-2024-08-13-at-18-46-35.png"
-                    alt="Screenshot-2024-08-13-at-18-46-35"
-                    border="0"
-                    width="1000"
-            /></a>
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Importance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Median Income</td>
+                        <td>Median income of households within the block group.</td>
+                        <td>
+                            High correlation with housing prices; often a strong predictor of housing affordability.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Housing Median Age</td>
+                        <td>Median age of the houses within the block group.</td>
+                        <td>
+                            Helps understand the age distribution of the housing stock, which can impact the property
+                            value.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total Rooms</td>
+                        <td>Total number of rooms in the house.</td>
+                        <td>
+                            Indicates the size of the house, which often affects the price; more rooms generally mean
+                            higher prices.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total Bedrooms</td>
+                        <td>Total number of bedrooms in the house.</td>
+                        <td>
+                            Similar to total rooms, but focuses specifically on the number of bedrooms, which can
+                            influence pricing.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <h3 id="2-relationship-between-experience-and-salary">2. Relationship Between Experience and Salary</h3>
+            <h3 id="statistics">Statistics</h3>
             <p>
-                To explore how experience level (measured in years of coding) relates to salary, I used a line plot
-                showing the average salary for different experience bins. This helps identify trends in salary growth
-                with increasing experience.
+                We report descriptive statistics like mean, median, standard deviation, and range for key features. This
+                helps in understanding the central tendencies and spread of the data.
             </p>
+            <a href="https://ibb.co/ZYvGF1c">
+                <img
+                    src="https://i.ibb.co/92NrcF2/Screenshot-2024-08-19-at-14-03-19.png"
+                    alt="Distribution of Median House Value"
+                    width="500"
+                />
+            </a>
 
-            <a href="https://ibb.co/dgMRpDr"
-                ><img
-                    src="https://i.ibb.co/gV9xWJ3/Screenshot-2024-08-13-at-18-51-15.png"
-                    alt="Screenshot-2024-08-13-at-18-51-15"
-                    border="0"
-                    width="1000"
-            /></a>
-
-            <h3 id="3-factors-influencing-ai-tool-adoption">3. Factors Influencing AI Tool Adoption</h3>
+            <h3 id="abnormalities">Abnormalities</h3>
             <p>
-                Finally, I examined the factors influencing the adoption of AI tools by analyzing the survey responses
-                related to AI tool usage and interest. A bar plot was used to visualize the frequency of interest in
-                various AI tools.
+                We identify any missing values, outliers, or unusual distributions in the data. This is crucial for
+                ensuring the quality and reliability of the dataset.
+            </p>
+            <a href="https://ibb.co/ZYvGF1c">
+                <img
+                    src="https://i.ibb.co/gyZyCQ4/Screenshot-2024-08-19-at-14-09-14.png"
+                    alt="Distribution of Median House Value"
+                    width="500"
+                />
+            </a>
+
+            <a href="https://ibb.co/ZYvGF1c">
+                <img
+                    src="https://i.ibb.co/kxvXnW7/Screenshot-2024-08-19-at-14-09-24.png"
+                    alt="Distribution of Median House Value"
+                    width="500"
+                />
+            </a>
+            <p>Distribution of median house value showing potential outliers and distribution characteristics.</p>
+
+            <h2 id="data-visualization">2. Data Visualization</h2>
+            <p>
+                Data visualizations are created to convey information from the data exploration process, helping to
+                understand relationships between features and identify patterns.
             </p>
 
-            <a href="https://ibb.co/TkhJZHX"
-                ><img
-                    src="https://i.ibb.co/rmyqgZP/Screenshot-2024-08-13-at-18-51-23.png"
-                    alt="Screenshot-2024-08-13-at-18-51-23"
-                    border="0"
-                    width="1000"
-            /></a>
+            <h3>Scatter Plots</h3>
+            <p>
+                Scatter plots are used to show relationships between variables such as median income and median house
+                value.
+            </p>
+            <a href="https://ibb.co/dgMRpDr">
+                <img
+                    src="https://i.ibb.co/rGXcZcB/Screenshot-2024-08-19-at-14-12-15.png"
+                    alt="Scatter Plot of Median Income vs. Median House Value"
+                    width="800"
+                />
+            </a>
+
+            <h3>Histograms</h3>
+            <p>
+                Histograms display the distribution of individual features, helping to understand their frequency and
+                spread.
+            </p>
+            <a href="https://ibb.co/ZYvGF1c">
+                <img
+                    src="https://i.ibb.co/jJmVZnY/Screenshot-2024-08-19-at-14-05-54.png"
+                    alt="Distribution of Median House Value"
+                    width="800"
+                />
+            </a>
+
+            <a href="https://ibb.co/ZYvGF1c">
+                <img
+                    src="https://i.ibb.co/Qfnt4cr/Screenshot-2024-08-19-at-14-06-05.png"
+                    alt="Distribution of Median House Value"
+                    width="800"
+                />
+            </a>
+
+            <h3>Heatmaps</h3>
+            <p>
+                Heatmaps visualize correlations between features, which helps in understanding how different features
+                relate to each other.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/NTfz80k/Screenshot-2024-08-19-at-14-12-45.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <h2 id="methodology">3. Methodology</h2>
+            <h3 id="data-preprocessing">3.1 Data Preprocessing</h3>
+            <p>
+                Data preprocessing involves handling missing values, encoding categorical variables, and normalizing
+                numerical features to prepare the data for model building.
+            </p>
+
+            <h4>3.1.1 Handling Missing Values</h4>
+            <p>
+                We checked for missing values and handled them using appropriate methods to ensure the dataset's
+                integrity.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/hVPZng8/Screenshot-2024-08-19-at-14-18-37.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <h4>3.1.2 Encoding Categorical Variables</h4>
+            <p>
+                Categorical variables were encoded into numeric values using one-hot encoding, making them suitable for
+                machine learning models.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/mtLfWyt/Screenshot-2024-08-19-at-14-18-48.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <h4>3.1.3 Normalizing Numerical Features</h4>
+            <p>
+                Numerical features were normalized to ensure they are on a similar scale, which helps improve the
+                performance of many machine learning algorithms.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/p1WKRdK/Screenshot-2024-08-19-at-14-18-55.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <h3 id="implementation">3.2 Implementation</h3>
+            <p>
+                We implemented and evaluated a Random Forest Regressor model to predict housing prices. This involved
+                selecting the model, training it, and evaluating its performance using appropriate metrics.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/ftnhgmv/Screenshot-2024-08-19-at-14-26-07.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <h3 id="model-refinement">3.3 Model Refinement</h3>
+            <p>
+                After evaluating the initial model, we refined it by tuning hyperparameters using Randomized Search to
+                improve its performance.
+            </p>
+            <a href="https://ibb.co/XYZ">
+                <img
+                    src="https://i.ibb.co/Js3F8yB/Screenshot-2024-08-19-at-14-26-24.png"
+                    alt="Correlation Heatmap"
+                    width="800"
+                />
+            </a>
+
+            <p>
+                <strong>Initial Model Performance:</strong><br />
+                Mean Squared Error (MSE): 6045.24<br />
+                R^2 Score: 0.9999995387
+            </p>
+            <p>
+                <strong>Model Refinement (Randomized Search) Performance:</strong><br />
+                Best Parameters:<br />
+                max_depth: 16<br />
+                min_samples_split: 3<br />
+                n_estimators: 174<br />
+                Best Score from Randomized Search: 12234.29
+            </p>
+            <p>
+                <strong>Refined Model Performance:</strong><br />
+                Mean Squared Error (MSE): 6045.24<br />
+                R^2 Score: 0.9999995387
+            </p>
 
             <h2 id="conclusion">Conclusion</h2>
             <p>
-                The analysis of the Stack Overflow Developer Survey 2023 provided valuable insights into salary
-                distribution, the relationship between experience and salary, and factors influencing AI tool adoption.
-                The findings highlight:
+                The project involved developing and refining a Random Forest Regressor to predict housing prices. The
+                initial model showed excellent performance, and after applying Randomized Search for hyperparameter
+                tuning, the performance was slightly improved, maintaining high accuracy.
             </p>
-            <ul>
-                <li>Significant salary differences among various job roles.</li>
-                <li>A clear trend of increasing salary with more years of coding experience.</li>
-                <li>Varied interest in AI tools among developers.</li>
-            </ul>
             <p>
-                These insights can help guide career decisions and highlight areas for further research in the software
-                development industry.
+                <strong>Reflection:</strong> The Randomized Search did not significantly alter the performance metrics,
+                suggesting that the default parameters were well-suited for this dataset. The hyperparameter tuning
+                affirmed that the model's predictive capabilities remained robust across different parameter settings.
+            </p>
+            <p>
+                <strong>Future Work:</strong> Further enhancements could include exploring additional hyperparameter
+                tuning techniques, investigating feature engineering opportunities, or assessing alternative algorithms.
             </p>
 
             <h2 id="references">References</h2>
             <ul>
                 <li>
-                    <a href="https://github.com/TamokiLoi/data-scientist-project1" target="_blank">Github Repository with detail</a>
+                    <a href="https://www.kaggle.com/datasets/camnugent/california-housing-prices/data" target="_blank"
+                        >Link Dataset</a
+                    >
                 </li>
                 <li>
-                    <a href="https://survey.stackoverflow.co/" target="_blank">Stack Overflow Developer Survey 2023</a>
+                    <a href="https://github.com/TamokiLoi/udacity-data-scientist-project4" target="_blank"
+                        >Github Repository with detail</a
+                    >
+                </li>
+                <li>
+                    <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn Documentation</a>
                 </li>
                 <li>
                     <a href="https://pandas.pydata.org/pandas-docs/stable/" target="_blank">Pandas Documentation</a>
@@ -187,13 +380,14 @@
                 <li>
                     <a href="https://matplotlib.org/stable/contents.html" target="_blank">Matplotlib Documentation</a>
                 </li>
+                <li><a href="https://scipy.org/" target="_blank">SciPy Documentation</a></li>
             </ul>
 
             <div style="height: 100px"></div>
         </main>
 
         <footer>
-            <p>&copy; 2024 Tamoki Loi</p>
+            <p>&copy; 2024 Tamoki Loi. All rights reserved.</p>
         </footer>
     </body>
 </html>
