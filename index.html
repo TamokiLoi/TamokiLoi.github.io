@@ -100,7 +100,7 @@
                 <li><a href="#references">References</a></li>
             </ul>
 
-            <h2 id="project-overview">Overview</h2>
+            <h2 id="project-overview">I. Overview</h2>
             <p>
                 This project focuses on predicting housing prices using the California Housing Prices dataset. The goal
                 is to build and refine a Random Forest Regressor model to accurately predict housing prices based on
@@ -108,13 +108,144 @@
                 refinement.
             </p>
 
-            <h2 id="data-exploration">1. Data Exploration</h2>
+            <h2 id="problem-domain">Problem Domain</h2>
+            <p>
+                The problem of predicting housing prices falls within the domain of real estate economics, a field that
+                analyzes various factors influencing the real estate market, including housing prices. The real estate
+                market is a critical component of the economy, and housing prices are influenced by a myriad of factors,
+                including economic conditions, demographics, and government policies.
+            </p>
+
+            <h3>Characteristics of the Real Estate Market</h3>
+            <p>
+                The real estate market is unique because it is highly localized, meaning that housing prices can vary
+                significantly between different regions, cities, or even neighborhoods. This variation is due to factors
+                such as local economic conditions, infrastructure development, and the availability of amenities.
+                Additionally, the real estate market is influenced by supply and demand dynamics, where the availability
+                of housing and the level of demand for homes play crucial roles in determining prices.
+            </p>
+
+            <h3>Challenges in the Real Estate Market</h3>
+            <p>
+                One of the key challenges in this domain is the accurate prediction of housing prices. Given the
+                complexity and variability of factors affecting the market, predicting housing prices requires a deep
+                understanding of the interactions between these factors. Moreover, external events such as economic
+                downturns or changes in government policies can have sudden and significant impacts on the market,
+                making prediction even more challenging.
+            </p>
+
+            <h3>Unique Considerations</h3>
+            <p>
+                When analyzing housing prices, it is important to consider factors such as geographical location, median
+                income, and housing characteristics, which can vary widely across different areas. The California
+                Housing Prices dataset used in this project provides a snapshot of these factors, allowing for an
+                in-depth analysis of the variables that most strongly influence housing prices in California.
+                Understanding these unique considerations is crucial for developing a predictive model that is both
+                accurate and reliable.
+            </p>
+
+            <h2>Project Definition</h2>
+            <p>
+                The goal of this project is to predict housing prices in California using the California Housing Prices
+                dataset. The problem is framed as a regression task where the target variable is the median house value
+                in various districts across California.
+            </p>
+
+            <h3>Problem Statement</h3>
+            <p>
+                Predicting housing prices accurately is crucial for various stakeholders, including homebuyers, real
+                estate investors, and policymakers. The challenge lies in understanding how different factors, such as
+                geographical location, median income, and housing characteristics, influence housing prices. By
+                developing a predictive model, we can estimate housing prices based on these features, thereby providing
+                valuable insights for decision-making.
+            </p>
+
+            <h3>Strategy for Solving the Problem</h3>
+            <p>
+                To address this problem, the project will employ a systematic approach consisting of several key steps:
+            </p>
+            <ol>
+                <li>
+                    <strong>Data Exploration and Understanding:</strong>
+                    <ul>
+                        <li>
+                            Objective: Gain a comprehensive understanding of the dataset by exploring the features and
+                            target variable.
+                        </li>
+                        <li>
+                            Methodology: Utilize statistical summaries and visualizations to identify important
+                            patterns, correlations, and potential outliers in the data. This step will guide the data
+                            preprocessing and model-building stages.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Data Preprocessing:</strong>
+                    <ul>
+                        <li>
+                            Objective: Prepare the data for model training by handling missing values, encoding
+                            categorical variables, and normalizing numerical features.
+                        </li>
+                        <li>
+                            Methodology: Implement techniques such as imputation for missing values, one-hot encoding
+                            for categorical variables, and normalization for numerical features to ensure the data is
+                            suitable for machine learning algorithms.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Model Building:</strong>
+                    <ul>
+                        <li>Objective: Develop a predictive model using the Random Forest Regressor algorithm.</li>
+                        <li>
+                            Methodology: Train the Random Forest model on the processed dataset, leveraging its ability
+                            to handle complex relationships and interactions between features.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Model Evaluation:</strong>
+                    <ul>
+                        <li>
+                            Objective: Assess the model's performance using metrics such as Root Mean Squared Error
+                            (RMSE) and R² Score.
+                        </li>
+                        <li>
+                            Methodology: Evaluate the model's accuracy and robustness, and compare its predictions to
+                            actual housing prices to ensure it meets the desired performance criteria.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Model Refinement:</strong>
+                    <ul>
+                        <li>
+                            Objective: Improve the model's performance through hyperparameter tuning and other
+                            optimization techniques.
+                        </li>
+                        <li>
+                            Methodology: Apply Randomized Search or Grid Search to fine-tune the model's hyperparameters
+                            and enhance its predictive accuracy.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Expected Solution</h3>
+            <p>
+                The expected outcome of this project is a robust predictive model that accurately estimates housing
+                prices based on the input features. The model's performance will be validated against a test dataset,
+                and the results will provide insights into the factors most strongly influencing housing prices in
+                California.
+            </p>
+
+            <h2 id="data-exploration">II. Data Exploration</h2>
             <p>
                 In this section, we explore the dataset to understand its features and characteristics. We report
                 relevant statistics and identify any abnormalities or features that need to be addressed.
             </p>
 
-            <h3 id="feature-summary">Feature Summary</h3>
+            <h3 id="feature-summary">1. Feature Summary</h3>
             <p>
                 The dataset includes several key features that are crucial for predicting housing prices. Here is a
                 summary of these features and their importance:
@@ -163,7 +294,7 @@
                 </tbody>
             </table>
 
-            <h3 id="statistics">Statistics</h3>
+            <h3 id="statistics">2. Statistics</h3>
             <p>
                 We report descriptive statistics like mean, median, standard deviation, and range for key features. This
                 helps in understanding the central tendencies and spread of the data.
@@ -176,7 +307,7 @@
                 />
             </a>
 
-            <h3 id="abnormalities">Abnormalities</h3>
+            <h3 id="abnormalities">3. Abnormalities</h3>
             <p>
                 We identify any missing values, outliers, or unusual distributions in the data. This is crucial for
                 ensuring the quality and reliability of the dataset.
@@ -198,7 +329,7 @@
             </a>
             <p>Distribution of median house value showing potential outliers and distribution characteristics.</p>
 
-            <h2 id="data-visualization">2. Data Visualization</h2>
+            <h2 id="data-visualization">III. Data Visualization</h2>
             <p>
                 Data visualizations are created to convey information from the data exploration process, helping to
                 understand relationships between features and identify patterns.
@@ -251,14 +382,14 @@
                 />
             </a>
 
-            <h2 id="methodology">3. Methodology</h2>
-            <h3 id="data-preprocessing">3.1 Data Preprocessing</h3>
+            <h2 id="methodology">IV. Methodology</h2>
+            <h3 id="data-preprocessing">1. Data Preprocessing</h3>
             <p>
                 Data preprocessing involves handling missing values, encoding categorical variables, and normalizing
                 numerical features to prepare the data for model building.
             </p>
 
-            <h4>3.1.1 Handling Missing Values</h4>
+            <h4>1.1 Handling Missing Values</h4>
             <p>
                 We checked for missing values and handled them using appropriate methods to ensure the dataset's
                 integrity.
@@ -271,7 +402,7 @@
                 />
             </a>
 
-            <h4>3.1.2 Encoding Categorical Variables</h4>
+            <h4>1.2 Encoding Categorical Variables</h4>
             <p>
                 Categorical variables were encoded into numeric values using one-hot encoding, making them suitable for
                 machine learning models.
@@ -284,7 +415,7 @@
                 />
             </a>
 
-            <h4>3.1.3 Normalizing Numerical Features</h4>
+            <h4>1.3 Normalizing Numerical Features</h4>
             <p>
                 Numerical features were normalized to ensure they are on a similar scale, which helps improve the
                 performance of many machine learning algorithms.
@@ -297,7 +428,7 @@
                 />
             </a>
 
-            <h3 id="implementation">3.2 Implementation</h3>
+            <h3 id="implementation">2. Implementation</h3>
             <p>
                 We implemented and evaluated a Random Forest Regressor model to predict housing prices. This involved
                 selecting the model, training it, and evaluating its performance using appropriate metrics.
@@ -310,7 +441,7 @@
                 />
             </a>
 
-            <h3 id="model-refinement">3.3 Model Refinement</h3>
+            <h3 id="model-refinement">3 Model Refinement</h3>
             <p>
                 After evaluating the initial model, we refined it by tuning hyperparameters using Randomized Search to
                 improve its performance.
@@ -342,7 +473,7 @@
                 R^2 Score: 0.9999995387
             </p>
 
-            <h2 id="conclusion">Conclusion</h2>
+            <h2 id="conclusion">V. Conclusion</h2>
             <p>
                 The project involved developing and refining a Random Forest Regressor to predict housing prices. The
                 initial model showed excellent performance, and after applying Randomized Search for hyperparameter
@@ -358,7 +489,7 @@
                 tuning techniques, investigating feature engineering opportunities, or assessing alternative algorithms.
             </p>
 
-            <h2 id="references">References</h2>
+            <h2 id="references">VI. References</h2>
             <ul>
                 <li>
                     <a href="https://www.kaggle.com/datasets/camnugent/california-housing-prices/data" target="_blank"
